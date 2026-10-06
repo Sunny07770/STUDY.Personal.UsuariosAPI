@@ -16,7 +16,8 @@ namespace UsuariosAPI.Services
                 new Claim("username", usuario.UserName),
                 new Claim("id", usuario.Id),
                 new Claim(ClaimTypes.DateOfBirth,
-                usuario.DataNascimento.ToString())
+                usuario.DataNascimento.ToString()),
+                new Claim("loginTimeStamp", DateTime.Now.ToString())
             };
 
             var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9ASHDA98H9ah9ha9H9A89n0ffffffffffffff"));
