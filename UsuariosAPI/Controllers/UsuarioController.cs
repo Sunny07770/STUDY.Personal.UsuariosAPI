@@ -12,17 +12,24 @@ namespace UsuariosAPI.Controllers;
 
 public class UsuarioController : ControllerBase
 {
-    private CadastroService cadastroService;
+    private UsuarioService usuarioService;
 
-    public UsuarioController(CadastroService cadastroService)
+    public UsuarioController(UsuarioService cadastroService)
     {
-        this.cadastroService = cadastroService;
+        this.usuarioService = cadastroService;
     }
 
-    [HttpPost]
+    [HttpPost("cadastro")]
     public async Task<IActionResult> CadastraUsuario(CreateUsuarioDto dto)
     {
-        await cadastroService.Cadastra(dto);
+        await usuarioService.Cadastra(dto);
         return Ok("Usuário cadastrado!");
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login (LoginUsuarioDto dto)
+    {
+        var token = await usuarioService.Login(dto);
+        return Ok(token);
     }
 }
